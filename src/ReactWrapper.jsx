@@ -204,13 +204,14 @@ export default class ReactWrapper {
    * NOTE: can only be called on a wrapper instance that is also the root instance.
    *
    * @param {Object} props object
+   * @param {Function} cb - callback function
    * @returns {ReactWrapper}
    */
-  setProps(props) {
+  setProps(props, cb) {
     if (this.root !== this) {
       throw new Error('ReactWrapper::setProps() can only be called on the root');
     }
-    this.component.setChildProps(props);
+    this.component.setChildProps(props, cb);
     return this;
   }
 
@@ -224,13 +225,14 @@ export default class ReactWrapper {
    * NOTE: can only be called on a wrapper instance that is also the root instance.
    *
    * @param {Object} state to merge
+   * @param {Function} cb - callback function
    * @returns {ReactWrapper}
    */
-  setState(state) {
+  setState(state, cb) {
     if (this.root !== this) {
       throw new Error('ReactWrapper::setState() can only be called on the root');
     }
-    this.instance().setState(state);
+    this.instance().setState(state, cb);
     return this;
   }
 

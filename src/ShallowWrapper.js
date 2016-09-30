@@ -242,9 +242,10 @@ export default class ShallowWrapper {
    * NOTE: can only be called on a wrapper instance that is also the root instance.
    *
    * @param {Object} state to merge
+   * @param {Function} cb - callback function
    * @returns {ShallowWrapper}
    */
-  setState(state) {
+  setState(state, cb) {
     if (this.root !== this) {
       throw new Error('ShallowWrapper::setState() can only be called on the root');
     }
@@ -253,7 +254,7 @@ export default class ShallowWrapper {
     }
     this.single('setState', () => {
       withSetStateAllowed(() => {
-        this.instance().setState(state);
+        this.instance().setState(state, cb);
         this.update();
       });
     });
